@@ -5,19 +5,15 @@ Shell Script for Azure ML Workspace Setup
 ![Azure Cloud Shell](https://github.com/Sahiep/AML-Setup/blob/master/images/AzureCloudShell.png)
 
 ## Execute the following command:
+Clone Git Repository
 ```sh
 $ git clone https://github.com/Sahiep/AML-Setup.git
 ``` 
+Access AML-Setup Folder
 ```sh
 $ cd AML-Setup
 ``` 
-```sh
-$ dir
-``` 
-```sh
-Ouput: create-env.sh  LICENSE  README.md
-``` 
-
+Execute Shell Script
 ```sh
 $ . create-env.sh
 ``` 

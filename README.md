@@ -17,4 +17,12 @@ Execute Shell Script
 ```sh
 $ . create-env.sh
 ``` 
+## The following Ressources are going to be deployed
+![Azure Ressources](https://github.com/Sahiep/AML-Setup/blob/master/images/DeployedRessources.PNG)
+
+* Azure Container Registry
+* Azure Key Vault
+* Azure Machine Learning Workspace
+* Azure Storage Account
+* Azure Application Insights
 

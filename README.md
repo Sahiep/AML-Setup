@@ -1,5 +1,5 @@
 ## AML-Setup
-Shell Script for Azure ML Workspace Setup
+Bash Script for Azure ML Workspace Setup
 
 ## Execute in Azure Cloud Shell
 ![Azure Cloud Shell](https://github.com/Sahiep/AML-Setup/blob/master/images/AzureCloudShell.png)

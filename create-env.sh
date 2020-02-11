@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PREFIX=contosoml
+export PREFIX=contosoml$RANDOM
 export RG_NAME=${PREFIX}_RG
 export LOCATION=northeurope
 
@@ -36,36 +36,32 @@ az storage account create \
     --kind "StorageV2" \
     --output none
 
-STORAGE_ACCOUNT_ID=$(az storage account list --query "[?name=='${STORAGE_ACCOUNT_NAME}'].{id:id}[0]" | jq -r '.id')
+STORAGE_ACCOUNT_ID=$(az storage account list --query "[?name=='${STORAGE_ACCOUNT_NAME}'].id" -o tsv)
 
 # Create a Container Registry
-az acr create \
+ACR_ID=$(az acr create \
     --name ${ACR_NAME} \
     --resource-group "${RG_NAME}" \
     --location ${LOCATION} \
     --admin-enabled "true" \
     --sku Standard \
-    --output none
-
-
-ACR_ID=$(az acr list --query "[?name=='${ACR_NAME}'].{id:id}[0]" | jq -r '.id')
+    --output tsv \
+    --query "id")
 
 # Create a KeyVault
-az keyvault create \
+KV_ID=$(az keyvault create \
     --name ${KV_NAME} \
     --resource-group "${RG_NAME}" \
     --location ${LOCATION} \
-    --output none
+    --output tsv \
+    --query "id")
 
-KV_ID=$(az keyvault list --query "[?name=='${KV_NAME}'].{id:id}[0]" | jq -r '.id')
-
-az monitor app-insights component create \
+APP_INSIGHTS_ID=$(az monitor app-insights component create \
     --app ${APP_INSIGHTS_NAME} \
     --location ${LOCATION} \
     --resource-group ${RG_NAME} \
-    --output none
-
-APP_INSIGHTS_ID=$(az monitor app-insights component show --query "[?applicationId=='${APP_INSIGHTS_NAME}'].{id:id}[0]" | jq -r '.id')
+    --output tsv \
+    --query "id")
 
 # Finally create the ML Workspace referencing all components...
 az ml workspace create \
@@ -75,4 +71,5 @@ az ml workspace create \
     --location ${LOCATION} \
     --container-registry ${ACR_ID} \
     --application-insights ${APP_INSIGHTS_ID} \
+    --sku "enterprise" \
     --storage-account ${STORAGE_ACCOUNT_ID}

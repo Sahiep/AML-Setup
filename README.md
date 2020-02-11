@@ -13,7 +13,7 @@ Access AML-Setup Folder
 ```sh
 $ cd AML-Setup
 ``` 
-Execute Shell Script
+Execute Bash Script
 ```sh
 $ . create-env.sh
 ``` 

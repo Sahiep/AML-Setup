@@ -71,4 +71,5 @@ az ml workspace create \
     --location ${LOCATION} \
     --container-registry ${ACR_ID} \
     --application-insights ${APP_INSIGHTS_ID} \
+    --sku "enterprise" \
     --storage-account ${STORAGE_ACCOUNT_ID}
